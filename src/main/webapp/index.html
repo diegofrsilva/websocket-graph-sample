@@ -1,0 +1,36 @@
+<html>
+
+    <head>
+        <title>WebSockets sample</title>
+        <link rel="stylesheet" type="text/css" href="css/graph.css">
+    </head>
+
+    <body>
+        <button id="toggleConnectionButton" onclick="toggleConnection()">Disconect</button>
+
+        <div id="graph" class="graph"></div>
+
+        <script src="http://mbostock.github.com/d3/d3.v2.js"></script>
+        <script src="js/graph.js"></script>
+        <script src="js/data-web-socket.js"></script>
+
+        <script>
+            var socketHandler = new SocketHandler(), connected = true;
+
+            socketHandler.connect();
+
+            function toggleConnection() {
+                if(connected) {
+                    socketHandler.disconnect();
+                    connected = false;
+                    document.getElementById('toggleConnectionButton').innerHTML = 'Connect';
+                } else {
+                    console.log('connecting');
+                    socketHandler.connect();
+                    connected = true;
+                    document.getElementById('toggleConnectionButton').innerHTML = 'Disconnect';
+                }
+            }
+        </script>
+    </body>
+</html>
